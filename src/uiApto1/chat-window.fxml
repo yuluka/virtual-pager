@@ -16,8 +16,16 @@
             <Font name="Arial Bold" size="22.0" />
          </font>
       </Label>
-      <TextArea fx:id="TXTA_CHAT" layoutX="14.0" layoutY="40.0" prefHeight="286.0" prefWidth="571.0" />
-      <TextField fx:id="TXT_MESSAGE" layoutX="14.0" layoutY="340.0" onKeyPressed="#checkKey" prefHeight="33.0" prefWidth="521.0" />
+      <TextArea fx:id="TXTA_CHAT" editable="false" layoutX="14.0" layoutY="40.0" prefHeight="286.0" prefWidth="571.0">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font>
+      </TextArea>
+      <TextField fx:id="TXT_MESSAGE" layoutX="14.0" layoutY="340.0" onKeyPressed="#checkKey" prefHeight="33.0" prefWidth="521.0" promptText="Escribe tu mensaje">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font>
+      </TextField>
       <ImageView fx:id="BTTN_SEND" fitHeight="45.0" fitWidth="49.0" layoutX="541.0" layoutY="334.0" onMouseClicked="#sendMessage" onMouseMoved="#showSendTooltip" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../icons/Send%20message.png" />

@@ -4,12 +4,16 @@ import java.io.IOException;
 import java.util.Optional;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import modelApto1.ApartmentOne;
 
 public class MainWindow {
@@ -21,8 +25,15 @@ public class MainWindow {
     private ImageView BTTN_PANIC;
 
     @FXML
-    void beginChat(MouseEvent event) {
+    void beginChat(MouseEvent event) throws IOException {
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("../uiApto2/chat-window.fxml"));
+    	loader.setController(new Chat());
+    	Parent root = loader.load();
     	
+    	Stage st = new Stage();
+    	Scene sc = new Scene(root);
+    	st.setScene(sc);
+    	st.show();
     }
 
     @FXML
