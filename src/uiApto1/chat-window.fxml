@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="276.0" layoutY="6.0" text="Chat">
@@ -29,6 +28,11 @@
       <ImageView fx:id="BTTN_SEND" fitHeight="45.0" fitWidth="49.0" layoutX="541.0" layoutY="334.0" onMouseClicked="#sendMessage" onMouseMoved="#showSendTooltip" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../icons/Send%20message.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="BTTN_BACK" accessibleRole="BUTTON" fitHeight="56.0" fitWidth="48.0" layoutY="-5.0" onMouseClicked="#back" onMouseMoved="#showBackTooltip" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../icons/Back.png" />
          </image>
       </ImageView>
    </children>

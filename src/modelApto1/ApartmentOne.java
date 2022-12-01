@@ -15,6 +15,7 @@ public class ApartmentOne {
 	private static final String CHAT_MESSAGE_ID = "1";
 
 	private static Chat chat;
+	private static MainWindow mainWindow;
 	
 	private static int numberPortGateHouse = 6665;
 	private static int portNumberApto2 = 6666;
@@ -37,8 +38,8 @@ public class ApartmentOne {
 	public static void initializeThings() throws IOException {
 		socket = new DatagramSocket(6667);
 		
-		gatehouseIp = InetAddress.getByName("192.168.18.5");
-		apartmentTwoIp = InetAddress.getByName("192.168.18.5");
+		gatehouseIp = InetAddress.getByName("192.168.18.136");
+		apartmentTwoIp = InetAddress.getByName("192.168.18.136");
 		
 		receiveMessagesThread();
 	}
@@ -129,7 +130,17 @@ public class ApartmentOne {
 			
 			@Override
 			public void run() {
-				chat.displayIncomingMessage(message);
+				try {
+					if(chat == null) {
+						mainWindow.beginChat(null);
+						chat.displayIncomingMessage(message);
+					} else {
+						chat.displayIncomingMessage(message);
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
 			}
 		});
 	}
@@ -179,5 +190,14 @@ public class ApartmentOne {
 	 */
 	public static void initializeChat(Chat chatSent) {
 		chat = chatSent;
+	}
+	
+	/**
+	 * Initializes a MainWindow object with the value received.
+	 * 
+	 * @param mainWindowSent the value to initialize the MainWindow object.
+	 */
+	public static void initializeMainWindow(MainWindow mainWindowSent) {
+		mainWindow = mainWindowSent;
 	}
 }

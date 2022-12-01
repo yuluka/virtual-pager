@@ -5,7 +5,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
@@ -13,9 +16,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import modelApto2.ApartmentTwo;
 
 public class Chat implements Initializable {
+	
+	@FXML
+    private ImageView BTTN_BACK;
 	
     @FXML
     private ImageView BTTN_SEND;
@@ -78,6 +85,29 @@ public class Chat implements Initializable {
     public void displayIncomingMessage(String message) {
     	TXTA_CHAT.appendText("(Apto 1): " + message + "\n");
 	}
+    
+    /**
+     * Opens the main window again and closes the chat window, when the user clicks over
+     * the back button.
+     * 
+     * @param event the mouse click.
+     */
+    @FXML
+    void back(MouseEvent event) throws IOException {
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("../uiApto2/main-window.fxml"));
+    	loader.setController(new MainWindow());
+    	Parent root = loader.load();
+    	
+    	Stage st = new Stage();
+    	Scene sc = new Scene(root);
+    	st.setScene(sc);
+    	st.show();
+    	
+    	ApartmentTwo.initializeChat(null);
+    	
+    	Stage auxSt = (Stage) BTTN_BACK.getScene().getWindow();
+    	auxSt.close();
+    }
 
     /**
      * Shows a label, with a description of what the button does, when the mouse is moved
@@ -89,6 +119,18 @@ public class Chat implements Initializable {
     void showSendTooltip(MouseEvent event) {
     	Tooltip t = new Tooltip("Enviar mensaje");
     	Tooltip.install(BTTN_SEND, t);
+    }
+    
+    /**
+     * Shows a label, with a description of what the button does, when the mouse is moved
+     * over the back button.
+     * 
+     * @param event the mouse moving over the button.
+     */
+    @FXML
+    void showBackTooltip(MouseEvent event) {
+    	Tooltip t = new Tooltip("Volver a la ventana principal");
+    	Tooltip.install(BTTN_BACK, t);
     }
     
     /**

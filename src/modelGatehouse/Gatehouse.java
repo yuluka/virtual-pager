@@ -36,8 +36,8 @@ public class Gatehouse {
 	public static void initializeThings() throws IOException {
 		socket = new DatagramSocket(6665);
 		
-		apartmentOneIp = InetAddress.getByName("192.168.18.5");
-		apartmentTwoIp = InetAddress.getByName("192.168.18.5");
+		apartmentOneIp = InetAddress.getByName("192.168.18.136");
+		apartmentTwoIp = InetAddress.getByName("192.168.18.136");
 		
 		receiveMessagesThread();
 	}

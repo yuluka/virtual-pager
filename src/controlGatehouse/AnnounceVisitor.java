@@ -39,7 +39,7 @@ public class AnnounceVisitor {
      */
     @FXML
     void announceVisitor(ActionEvent event) throws IOException {
-    	String visitorName = TXT_VISITOR_NAME.getText() + " " + TXT_VISITOR_LASTNAME.getText();
+    	String visitorName = "0" + TXT_VISITOR_NAME.getText() + " " + TXT_VISITOR_LASTNAME.getText();
     	int destinationApto = 0;
     	
     	if(RBUTTON_APTO1.isSelected()) {

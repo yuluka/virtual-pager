@@ -1,10 +1,13 @@
 package controlApto1;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -16,7 +19,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import modelApto1.ApartmentOne;
 
-public class MainWindow {
+public class MainWindow implements Initializable {
 
     @FXML
     private ImageView BTTN_CHAT;
@@ -32,8 +35,8 @@ public class MainWindow {
      * @throws IOException
      */
     @FXML
-    void beginChat(MouseEvent event) throws IOException {
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("../uiApto2/chat-window.fxml"));
+    public void beginChat(MouseEvent event) throws IOException {
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("../uiApto1/chat-window.fxml"));
     	loader.setController(new Chat());
     	Parent root = loader.load();
     	
@@ -41,8 +44,11 @@ public class MainWindow {
     	Scene sc = new Scene(root);
     	st.setScene(sc);
     	st.show();
+    	
+    	Stage auxSt = (Stage) BTTN_CHAT.getScene().getWindow();
+    	auxSt.close();
     }
-
+    
     /**
      * Sends a panic alert to the gatehouse and shows an alert saying that the panic alert
      * was sent, when the user clicks over the press panic button.
@@ -120,5 +126,10 @@ public class MainWindow {
      */
     public static void sendAnswer(boolean answer) throws IOException {
     	ApartmentOne.sendAnswer(answer);
+	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		ApartmentOne.initializeMainWindow(this);
 	}
 }
