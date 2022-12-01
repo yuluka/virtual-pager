@@ -30,6 +30,13 @@ public class AnnounceVisitor {
     @FXML
     private TextField TXT_VISITOR_NAME;
     
+    /**
+     * Collects the visitor's information the doorman has entered, and sends it to the 
+     * visitor's destination apartment, when the user clicks over the button. 
+     * 
+     * @param event the mouse click.
+     * @throws IOException
+     */
     @FXML
     void announceVisitor(ActionEvent event) throws IOException {
     	String visitorName = TXT_VISITOR_NAME.getText() + " " + TXT_VISITOR_LASTNAME.getText();
@@ -41,12 +48,16 @@ public class AnnounceVisitor {
     		destinationApto = 2;
     	}
     	
-//    	Gatehouse.initializeThings();
     	Gatehouse.announceVisitor(visitorName, destinationApto);
     	
     	goToMainWindow();
     }
     
+    /**
+     * Opens, again, the main window, and closes the window to announce visitors.
+     * 
+     * @throws IOException
+     */
     public void goToMainWindow() throws IOException {
     	FXMLLoader loader = new FXMLLoader(getClass().getResource("../uiGatehouse/main-window.fxml"));
     	loader.setController(new MainWindow());
@@ -61,11 +72,4 @@ public class AnnounceVisitor {
     	auxSt.close();
 	}
     
-//    public static void showApartmentAnswer(String answer) {
-//		Alert alert = new Alert(AlertType.INFORMATION);
-//		alert.setTitle("Respuesta a petición de entrada");
-//		alert.setHeaderText("El apartamento ha respondido:");
-//		alert.setContentText(answer);
-//		alert.show();
-//	}
 }

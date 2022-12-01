@@ -21,7 +21,7 @@
             <Font name="Arial" size="20.0" />
          </font>
       </TextArea>
-      <TextField fx:id="TXT_MESSAGE" layoutX="14.0" layoutY="340.0" onKeyPressed="#checkKey" prefHeight="33.0" prefWidth="521.0" promptText="Escribe tu mensaje">
+      <TextField fx:id="TXT_MESSAGE" layoutX="14.0" layoutY="338.0" onKeyPressed="#checkKey" prefHeight="33.0" prefWidth="521.0" promptText="Escribe tu mensaje">
          <font>
             <Font name="Arial" size="20.0" />
          </font>
