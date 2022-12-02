@@ -84,45 +84,47 @@ public class ApartmentTwo {
 		socket.send(panicPacket);
 		
 		if(loadEmailData()) {
-			sendEmergencyEmail();
+			sendEmergencyEmailThread();
 		}
 	}
 	
-	private static void sendEmergencyEmail() {
-		Properties properties = new Properties();
-		
-		properties.put("mail.smtp.host", "smtp.gmail.com");
-		properties.put("mail.smtp.starttls.enable", "true");
-		properties.put("mail.smtp.port", 25);
-		properties.put("mail.smtp.user", "username");
-		properties.put("mail.smtp.auth", "true");
-		properties.put("mail.debug","true");
-		properties.put("mail.smtp.EnableSSL.enable", "true");
-		
-		properties.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-		properties.setProperty("mail.smtp.socketFactory.fallback", "false");
-		properties.setProperty("mail.smtp.port", "465");
-		properties.setProperty("mail.smtp.socketFactory.port", "465");
- 
-		Session session = Session.getDefaultInstance(properties);
-		
-		try{
-			MimeMessage message = new MimeMessage(session);
+	private static void sendEmergencyEmailThread() {
+		new Thread(() -> {
+			Properties properties = new Properties();
+			
+			properties.put("mail.smtp.host", "smtp.gmail.com");
+			properties.put("mail.smtp.starttls.enable", "true");
+			properties.put("mail.smtp.port", 25);
+			properties.put("mail.smtp.user", "username");
+			properties.put("mail.smtp.auth", "true");
+			properties.put("mail.debug","true");
+			properties.put("mail.smtp.EnableSSL.enable", "true");
+			
+			properties.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+			properties.setProperty("mail.smtp.socketFactory.fallback", "false");
+			properties.setProperty("mail.smtp.port", "465");
+			properties.setProperty("mail.smtp.socketFactory.port", "465");
+	 
+			Session session = Session.getDefaultInstance(properties);
+			
+			try{
+				MimeMessage message = new MimeMessage(session);
 
-			message.setFrom(new InternetAddress(myEmail));
-			message.addRecipient(Message.RecipientType.TO, new InternetAddress(emergencyEmail));
-			message.setSubject("¡Emergencia!");
-			message.setText(emergencyMessage);
-			Transport t = session.getTransport("smtp");
-			
-			t.connect(myEmail, emailPassword);
-			
-			t.sendMessage(message, message.getAllRecipients());
-		}catch (MessagingException me){
-			System.out.println(me.getMessage());
-			me.printStackTrace();
-			return;
-		}
+				message.setFrom(new InternetAddress(myEmail));
+				message.addRecipient(Message.RecipientType.TO, new InternetAddress(emergencyEmail));
+				message.setSubject("¡Emergencia!");
+				message.setText(emergencyMessage);
+				Transport t = session.getTransport("smtp");
+				
+				t.connect(myEmail, emailPassword);
+				
+				t.sendMessage(message, message.getAllRecipients());
+			}catch (MessagingException me){
+				System.out.println(me.getMessage());
+				me.printStackTrace();
+				return;
+			}
+		}).start();
 	}
 	
 	/**
