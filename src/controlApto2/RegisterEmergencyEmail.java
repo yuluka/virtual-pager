@@ -68,8 +68,6 @@ public class RegisterEmergencyEmail {
     	st.setScene(sc);
     	st.show();
     	
-    	ApartmentTwo.initializeChat(null);
-    	
     	Stage auxSt = (Stage) BTTN_BACK.getScene().getWindow();
     	auxSt.close();
     }

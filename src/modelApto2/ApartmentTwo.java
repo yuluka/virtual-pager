@@ -22,6 +22,8 @@ import javafx.application.Platform;
 
 public class ApartmentTwo {
 	
+	private final static String IPs_DATA_PATH = "dataApto2/IPs.txt";
+	
 	private static final String EMERGENCY_DATA_PATH = "dataApto2/Emergency data.txt";
 	private static final String MY_EMAIL_DATA_PATH = "dataApto2/My email data.txt";
 	
@@ -57,8 +59,8 @@ public class ApartmentTwo {
 	public static void initializeThings() throws IOException {
 		socket = new DatagramSocket(6666);
 		
-		gatehouseIp = InetAddress.getByName("192.168.18.136");
-		apartmentOneIp = InetAddress.getByName("192.168.18.136");
+//		gatehouseIp = InetAddress.getByName("192.168.18.136");
+//		apartmentOneIp = InetAddress.getByName("192.168.18.136");
 		
 		myEmail = null;
 		emailPassword = null;
@@ -66,6 +68,27 @@ public class ApartmentTwo {
 		emergencyMessage = null;
 		
 		receiveMessagesThread();
+	}
+	
+	public static void loadIPs() {
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(IPs_DATA_PATH));
+			
+			String line = br.readLine();
+			
+			if(line != null) {
+				apartmentOneIp = InetAddress.getByName(br.readLine());
+				gatehouseIp = InetAddress.getByName(br.readLine());
+			} else {
+				MainWindow.showNoIPsAlert();
+			}
+			
+			br.close();
+			
+		} catch (Exception e) {
+			MainWindow.showNoIPsAlert();
+		}
+		
 	}
 	
 	/**

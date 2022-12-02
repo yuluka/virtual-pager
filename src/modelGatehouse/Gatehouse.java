@@ -1,14 +1,19 @@
 package modelGatehouse;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 import controlGatehouse.MainWindow;
 import javafx.application.Platform;
 
 public class Gatehouse {
+	
+	private static final String IPs_DATA_PATH = "dataGatehouse/IPs.txt";
 	
 	private static final String ANSWER_MESSAGE_ID = "0";
 	private static final String ALERT_MESSAGE_ID = "1";
@@ -36,10 +41,33 @@ public class Gatehouse {
 	public static void initializeThings() throws IOException {
 		socket = new DatagramSocket(6665);
 		
-		apartmentOneIp = InetAddress.getByName("192.168.18.136");
-		apartmentTwoIp = InetAddress.getByName("192.168.18.136");
+//		apartmentOneIp = InetAddress.getByName("192.168.18.136");
+//		apartmentTwoIp = InetAddress.getByName("192.168.18.136");
+		
+//		loadIPs();
 		
 		receiveMessagesThread();
+	}
+	
+	public static void loadIPs() {
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(IPs_DATA_PATH));
+			
+			String line = br.readLine();
+			
+			if(line != null) {
+				apartmentOneIp = InetAddress.getByName(br.readLine());
+				apartmentTwoIp = InetAddress.getByName(br.readLine());
+			} else {
+				MainWindow.showNoIPsAlert();
+			}
+			
+			br.close();
+			
+		} catch (Exception e) {
+			MainWindow.showNoIPsAlert();
+		}
+		
 	}
 	
 	/**

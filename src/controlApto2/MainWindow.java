@@ -22,6 +22,9 @@ import modelApto2.ApartmentTwo;
 public class MainWindow implements Initializable {
 
     @FXML
+    private ImageView BTTN_CHANGE_IPS;
+	
+    @FXML
     private ImageView BTTN_CHAT;
 
     @FXML
@@ -33,6 +36,22 @@ public class MainWindow implements Initializable {
     @FXML
     private ImageView BTTN_REGISTER_MY_EMAIL;
 
+
+    @FXML
+    void changeIP(MouseEvent event) throws IOException {
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("../uiApto2/register-ips.fxml"));
+    	loader.setController(new RegisterIPs());
+    	Parent root = loader.load();
+    	
+    	Stage stage = new Stage();
+    	Scene sc = new Scene(root);
+    	stage.setScene(sc);
+    	stage.show();
+    	
+    	Stage auxSt = (Stage) BTTN_CHANGE_IPS.getScene().getWindow();
+    	auxSt.close();
+    }
+    
     /**
      * Opens a window where the apartment can chats with the other apartment, when the
      * user clicks over the begin chat button.
@@ -118,6 +137,13 @@ public class MainWindow implements Initializable {
     	auxSt.close();
     }
 
+
+    @FXML
+    void showChangeIPTooltip(MouseEvent event) {
+    	Tooltip t = new Tooltip("Registrar/Cambiar direcciones IP");
+    	Tooltip.install(BTTN_CHANGE_IPS, t);
+    }
+    
     /**
      * Shows a label, with a description of what the button does, when the mouse is moved
      * over the begin chat button.
@@ -205,6 +231,17 @@ public class MainWindow implements Initializable {
     	alert.show();
 	}
     
+    public static void showNoIPsAlert() {
+    	Alert alert = new Alert(AlertType.INFORMATION);
+		
+    	alert.setTitle("Sin información de IPs");
+		alert.setHeaderText("No hay información de IPs.");
+		alert.setContentText("No se han asignado las direcciones IP del Apto 2 y de la "
+				+ "portería, o las direcciones proporcionadas no son válidas. "
+				+ "Por favor hacerlo cuanto antes.");
+		alert.show();
+	}
+    
     /**
      * Sends the user's answer to the gatehouse.
      * 
@@ -218,5 +255,6 @@ public class MainWindow implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		ApartmentTwo.initializeMainWindow(this);
+		ApartmentTwo.loadIPs();
 	}
 }
