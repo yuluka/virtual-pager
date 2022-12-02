@@ -1,5 +1,6 @@
 package controlApto1;
 
+import java.applet.AudioClip;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
@@ -35,6 +36,8 @@ public class MainWindow implements Initializable {
 
     @FXML
     private ImageView BTTN_REGISTER_MY_EMAIL;
+    
+    private static AudioClip bell;
 
     /**
      * Opens a window where the apartment can changes the IP addresses of the other 
@@ -210,6 +213,8 @@ public class MainWindow implements Initializable {
      * @throws IOException
      */
     public static void showConfirmationDialog(String message) throws IOException {
+    	playBell();
+    	
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Visitante anunciado");
 		alert.setHeaderText("Un visitante, identificado con el nombre " + message 
@@ -268,12 +273,21 @@ public class MainWindow implements Initializable {
     public static void sendAnswer(boolean answer) throws IOException {
     	ApartmentOne.sendAnswer(answer);
 	}
+    
+    /**
+     * Plays the bell.
+     */
+    private static void playBell() {
+		bell.play();
+	}
 
     /**
      * Initializes the things inside the apartment.
      */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		bell = java.applet.Applet.newAudioClip(getClass().getResource("/sounds/Bell.wav"));
+		
 		ApartmentOne.initializeMainWindow(this);
 		ApartmentOne.loadIPs();
 	}

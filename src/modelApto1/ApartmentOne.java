@@ -1,5 +1,6 @@
 package modelApto1;
 
+import java.applet.AudioClip;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
