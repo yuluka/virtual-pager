@@ -19,8 +19,10 @@ public class Gatehouse {
 	
 	public static boolean panic = false;
 	
-	private static int portNumberApto1 = 6667;
-	private static int portNumberApto2 = 6666;
+//	private static int portNumberApto1 = 6667;
+//	private static int portNumberApto2 = 6666;
+	private static int portNumberApto1 = 8001;
+	private static int portNumberApto2 = 8002;
 	
 	private static DatagramSocket socket;
 	private static InetAddress apartmentOneIp;	
@@ -38,7 +40,8 @@ public class Gatehouse {
 	 * @throws IOException
 	 */
 	public static void initializeThings() throws IOException {
-		socket = new DatagramSocket(6665);
+//		socket = new DatagramSocket(6665);
+		socket = new DatagramSocket(8003);
 		
 		receiveMessagesThread();
 	}

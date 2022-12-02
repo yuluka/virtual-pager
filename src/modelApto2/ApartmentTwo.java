@@ -38,8 +38,10 @@ public class ApartmentTwo {
 	private static String emergencyEmail;
 	private static String emergencyMessage;
 	
-	private static int numberPortGateHouse = 6665;
-	private static int portNumberApto1 = 6667;
+//	private static int numberPortGateHouse = 6665;
+//	private static int portNumberApto1 = 6667;
+	private static int numberPortGateHouse = 8003;
+	private static int portNumberApto1 = 8001;
 
 	private static DatagramSocket socket;
 	private static InetAddress gatehouseIp;
@@ -57,7 +59,9 @@ public class ApartmentTwo {
 	 * @throws IOException
 	 */
 	public static void initializeThings() throws IOException {
-		socket = new DatagramSocket(6666);
+//		socket = new DatagramSocket(6666);
+		socket = new DatagramSocket(8002);
+		
 		
 		myEmail = null;
 		emailPassword = null;
