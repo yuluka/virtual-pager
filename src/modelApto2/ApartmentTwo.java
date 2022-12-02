@@ -1,9 +1,20 @@
 package modelApto2;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import controlApto2.Chat;
 import controlApto2.MainWindow;
@@ -11,11 +22,19 @@ import javafx.application.Platform;
 
 public class ApartmentTwo {
 	
+	private static final String EMERGENCY_DATA_PATH = "dataApto2/Emergency data.txt";
+	private static final String MY_EMAIL_DATA_PATH = "dataApto2/My email data.txt";
+	
 	private static final String VISITOR_MESSAGE_ID = "0";
 	private static final String CHAT_MESSAGE_ID = "1";
 
 	private static Chat chat;
 	private static MainWindow mainWindow;
+	
+	private static String myEmail;
+	private static String emailPassword;
+	private static String emergencyEmail;
+	private static String emergencyMessage;
 	
 	private static int numberPortGateHouse = 6665;
 	private static int portNumberApto1 = 6667;
@@ -41,6 +60,11 @@ public class ApartmentTwo {
 		gatehouseIp = InetAddress.getByName("192.168.18.136");
 		apartmentOneIp = InetAddress.getByName("192.168.18.136");
 		
+		myEmail = null;
+		emailPassword = null;
+		emergencyEmail = null;
+		emergencyMessage = null;
+		
 		receiveMessagesThread();
 	}
 	
@@ -58,6 +82,47 @@ public class ApartmentTwo {
 		
 		DatagramPacket panicPacket = new DatagramPacket(buf, buf.length, gatehouseIp, numberPortGateHouse);
 		socket.send(panicPacket);
+		
+		if(loadEmailData()) {
+			sendEmergencyEmail();
+		}
+	}
+	
+	private static void sendEmergencyEmail() {
+		Properties properties = new Properties();
+		
+		properties.put("mail.smtp.host", "smtp.gmail.com");
+		properties.put("mail.smtp.starttls.enable", "true");
+		properties.put("mail.smtp.port", 25);
+		properties.put("mail.smtp.user", "username");
+		properties.put("mail.smtp.auth", "true");
+		properties.put("mail.debug","true");
+		properties.put("mail.smtp.EnableSSL.enable", "true");
+		
+		properties.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+		properties.setProperty("mail.smtp.socketFactory.fallback", "false");
+		properties.setProperty("mail.smtp.port", "465");
+		properties.setProperty("mail.smtp.socketFactory.port", "465");
+ 
+		Session session = Session.getDefaultInstance(properties);
+		
+		try{
+			MimeMessage message = new MimeMessage(session);
+
+			message.setFrom(new InternetAddress(myEmail));
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(emergencyEmail));
+			message.setSubject("¡Emergencia!");
+			message.setText(emergencyMessage);
+			Transport t = session.getTransport("smtp");
+			
+			t.connect(myEmail, emailPassword);
+			
+			t.sendMessage(message, message.getAllRecipients());
+		}catch (MessagingException me){
+			System.out.println(me.getMessage());
+			me.printStackTrace();
+			return;
+		}
 	}
 	
 	/**
@@ -198,5 +263,56 @@ public class ApartmentTwo {
 	 */
 	public static void initializeMainWindow(MainWindow mainWindowSent) {
 		mainWindow = mainWindowSent;
+	}
+	
+	/**
+	 * Loads the required information to send the alert email.
+	 */
+	private static boolean loadEmailData() {
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(MY_EMAIL_DATA_PATH));
+			
+			String line = br.readLine();
+			
+			if(line != null) {
+				myEmail = br.readLine();
+				emailPassword = br.readLine();
+				
+				br.close();
+			} else {
+				MainWindow.showNoEmailDataAlert();
+				
+				br.close();
+				
+				return false;
+			}
+			
+			BufferedReader br1 = new BufferedReader(new FileReader(EMERGENCY_DATA_PATH));
+			
+			line = br1.readLine();
+			
+			if(line != null) {
+				emergencyEmail = br1.readLine();
+				emergencyMessage = br1.readLine();
+				
+				br1.close();
+			} else {
+				MainWindow.showNoEmailDataAlert();
+				
+				br1.close();
+				
+				return false;
+			}			
+			
+			return true;
+		} catch (FileNotFoundException e) {
+			MainWindow.showNoEmailDataAlert();
+			
+			return false;
+		} catch (IOException e) {
+			MainWindow.showNoEmailDataAlert();
+			
+			return false;
+		}
 	}
 }

@@ -109,10 +109,6 @@ public class ApartmentOne {
 		try{
 			MimeMessage message = new MimeMessage(session);
 			
-//			String from = "compunetprojectapto1@gmail.com";
-//			String password = "fjsgfodarntcpvfx";
-//			String to = "dennismassomacias@gmail.com";
-			
 			message.setFrom(new InternetAddress(myEmail));
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(emergencyEmail));
 			message.setSubject("¡Emergencia!");
@@ -311,11 +307,11 @@ public class ApartmentOne {
 			
 			return true;
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			MainWindow.showNoEmailDataAlert();
 			
 			return false;
 		} catch (IOException e) {
-			e.printStackTrace();
+			MainWindow.showNoEmailDataAlert();
 			
 			return false;
 		}

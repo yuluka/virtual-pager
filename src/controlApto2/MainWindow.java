@@ -26,6 +26,12 @@ public class MainWindow implements Initializable {
 
     @FXML
     private ImageView BTTN_PANIC;
+    
+    @FXML
+    private ImageView BTTN_REGISTER_EMERGENCY_EMAIL;
+
+    @FXML
+    private ImageView BTTN_REGISTER_MY_EMAIL;
 
     /**
      * Opens a window where the apartment can chats with the other apartment, when the
@@ -65,6 +71,52 @@ public class MainWindow implements Initializable {
     	alert.setContentText("La alerta ha sido enviada.");
     	alert.show();
     }
+    
+    /**
+     * Opens a window where the apartment register an emergency email, when the user 
+     * clicks over the register emergency email button.
+     * 
+     * @param event the mouse click.
+     * @throws IOException
+     */
+    @FXML
+    void registerEmergencyEmail(MouseEvent event) throws IOException {
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("../uiApto2/register-emergency-email.fxml"));
+    	loader.setController(new RegisterEmergencyEmail());
+    	
+    	Parent root = loader.load();
+    	
+    	Stage st = new Stage();
+    	Scene sc = new Scene(root);
+    	st.setScene(sc);
+    	st.show();
+    	
+    	Stage auxSt = (Stage) BTTN_REGISTER_EMERGENCY_EMAIL.getScene().getWindow();
+    	auxSt.close();
+    }
+    
+    /**
+     * Opens a window where the apartment register his/her email, when the user 
+     * clicks over the register my email button.
+     * 
+     * @param event the mouse click.
+     * @throws IOException
+     */
+    @FXML
+    void registerMyEmail(MouseEvent event) throws IOException {
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("../uiApto2/register-my-email.fxml"));
+    	loader.setController(new RegisterMyEmail());
+    	
+    	Parent root = loader.load();
+    	
+    	Stage st = new Stage();
+    	Scene sc = new Scene(root);
+    	st.setScene(sc);
+    	st.show();
+    	
+    	Stage auxSt = (Stage) BTTN_REGISTER_MY_EMAIL.getScene().getWindow();
+    	auxSt.close();
+    }
 
     /**
      * Shows a label, with a description of what the button does, when the mouse is moved
@@ -88,6 +140,30 @@ public class MainWindow implements Initializable {
     void showPanicButtonTooltip(MouseEvent event) {
     	Tooltip t = new Tooltip("Presionar el botón de pánico");
     	Tooltip.install(BTTN_PANIC, t);
+    }
+    
+    /**
+     * Shows a label, with a description of what the button does, when the mouse is moved
+     * over the register emergency email button.
+     * 
+     * @param event the mouse moving over the button.
+     */
+    @FXML
+    void showEmergencyEmailTooltip(MouseEvent event) {
+    	Tooltip t = new Tooltip("Registrar un correo de emergencia");
+    	Tooltip.install(BTTN_REGISTER_EMERGENCY_EMAIL, t);
+    }
+
+    /**
+     * Shows a label, with a description of what the button does, when the mouse is moved
+     * over the register my email button.
+     * 
+     * @param event the mouse moving over the button.
+     */
+    @FXML
+    void showMyEmailTooltip(MouseEvent event) {
+    	Tooltip t = new Tooltip("Registrar mi correo");
+    	Tooltip.install(BTTN_REGISTER_MY_EMAIL, t);
     }
     
     /**
@@ -116,6 +192,17 @@ public class MainWindow implements Initializable {
 		} else {
 			sendAnswer(false);
 		}
+	}
+    
+    public static void showNoEmailDataAlert() {
+    	Alert alert = new Alert(AlertType.INFORMATION);
+    	
+    	alert.setTitle("Información de envío de correo incompleta");
+    	alert.setHeaderText("Información de envío de correo de emergencia incompleta.");
+    	alert.setContentText("La información necesaria para enviar el correo de "
+    			+ "emergencia no ha sido ingresada completamente, por lo que no se puede "
+    			+ "hacer el envío del correo.");
+    	alert.show();
 	}
     
     /**
