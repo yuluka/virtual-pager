@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="267.0" prefWidth="374.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="84.0" layoutY="24.0" text="Registrar mi correo">
+         <font>
+            <Font name="Arial Bold" size="22.0" />
+         </font>
+      </Label>
+      <TextField fx:id="TXT_MY_EMAIL" layoutX="62.0" layoutY="76.0" onMouseMoved="#showMyEmailTooltip" promptText="Mi correo">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font>
+      </TextField>
+      <Button fx:id="BTTN_SAVE_EMAIL" layoutX="56.0" layoutY="205.0" mnemonicParsing="false" onAction="#saveMyEmail" text="Guardar">
+         <font>
+            <Font name="Arial Italic" size="18.0" />
+         </font>
+      </Button>
+      <TextField fx:id="TXT_PASSWORD" layoutX="62.0" layoutY="140.0" onMouseMoved="#showMyPasswordTooltip" promptText="Contraseña generada">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font>
+      </TextField>
+      <ImageView fx:id="BTTN_BACK" accessibleRole="BUTTON" fitHeight="56.0" fitWidth="48.0" onMouseClicked="#back" onMouseMoved="#showBackTooltip" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../icons/Back.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="BTTN_SEE_INFO" layoutX="167.0" layoutY="205.0" mnemonicParsing="false" onAction="#seeInfo" text="Ver información">
+         <font>
+            <Font name="Arial Italic" size="18.0" />
+         </font>
+      </Button>
+   </children>
+</Pane>
