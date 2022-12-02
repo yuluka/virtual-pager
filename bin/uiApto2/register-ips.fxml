@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="267.0" prefWidth="374.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="65.0" layoutY="24.0" text="Cambiar direcciones IP">
+         <font>
+            <Font name="Arial Bold" size="22.0" />
+         </font>
+      </Label>
+      <TextField fx:id="TXT_IP_APTO1" layoutX="62.0" layoutY="76.0" onMouseMoved="#showApto1IPTooltip" promptText="IP del Apartamento 1">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font>
+      </TextField>
+      <Button fx:id="BTTN_SAVE_IPs" layoutX="142.0" layoutY="205.0" mnemonicParsing="false" onAction="#saveIPs" text="Guardar">
+         <font>
+            <Font name="Arial Italic" size="18.0" />
+         </font>
+      </Button>
+      <TextField fx:id="TXT_IP_GATEHOUSE" layoutX="62.0" layoutY="140.0" onMouseMoved="#showGatehouseIPTooltip" promptText="IP de la portería">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font>
+      </TextField>
+      <ImageView fx:id="BTTN_BACK" accessibleRole="BUTTON" fitHeight="56.0" fitWidth="48.0" onMouseClicked="#back" onMouseMoved="#showBackTooltip" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../icons/Back.png" />
+         </image>
+      </ImageView>
+   </children>
+</Pane>
