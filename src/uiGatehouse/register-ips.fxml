@@ -20,7 +20,7 @@
             <Font name="Arial" size="20.0" />
          </font>
       </TextField>
-      <Button fx:id="BTTN_SAVE_EMAIL" layoutX="142.0" layoutY="205.0" mnemonicParsing="false" onAction="#saveIPs" text="Guardar">
+      <Button fx:id="BTTN_SAVE_IPs" layoutX="142.0" layoutY="205.0" mnemonicParsing="false" onAction="#saveIPs" text="Guardar">
          <font>
             <Font name="Arial Italic" size="18.0" />
          </font>

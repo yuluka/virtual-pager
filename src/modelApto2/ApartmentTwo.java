@@ -323,7 +323,14 @@ public class ApartmentTwo {
 			
 			if(line != null) {
 				emergencyEmail = br1.readLine();
-				emergencyMessage = br1.readLine();
+				line = br1.readLine();
+				emergencyMessage = "";
+				
+				while(line != null) {
+					emergencyMessage += line + "\n";
+					
+					line = br1.readLine();
+				}
 				
 				br1.close();
 			} else {
