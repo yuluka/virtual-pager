@@ -274,6 +274,7 @@ public class MainWindow implements Initializable {
     	ApartmentOne.sendAnswer(answer);
 	}
     
+    
     /**
      * Plays the bell.
      */
