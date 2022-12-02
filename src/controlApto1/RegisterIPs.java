@@ -37,6 +37,12 @@ public class RegisterIPs {
     @FXML
     private TextField TXT_IP_GATEHOUSE;
 
+    /**
+     * Opens the main window again and closes the register IPs window, when 
+     * the user clicks over the back button.
+     * 
+     * @param event the mouse click.
+     */
     @FXML
     void back(MouseEvent event) throws IOException {
     	FXMLLoader loader = new FXMLLoader(getClass().getResource("../uiApto1/main-window.fxml"));
@@ -52,6 +58,14 @@ public class RegisterIPs {
     	auxSt.close();
     }
 
+    /**
+     * When the user clicks over the button, verifies that the IP addresses entered are not 
+     * empty strings. If that is the case, shows an alert informing it. If not, saves 
+     * the data.
+     * 
+     * @param event the mouse's click.
+     * @throws IOException
+     */
     @FXML
     void saveIPs(ActionEvent event) throws IOException {
     	String ip1 = TXT_IP_APTO2.getText();
@@ -70,6 +84,9 @@ public class RegisterIPs {
     	}
     }
     
+    /**
+     * Shows an alert saying that the IP addresses information is not complete.
+     */
     private void showIncompleteInfoAlert() {
     	Alert alert = new Alert(AlertType.INFORMATION);
 		
@@ -80,18 +97,36 @@ public class RegisterIPs {
 		alert.show();
 	}
 
+    /**
+     * Shows a label, with a description of what is text field purpose, when the mouse is moved
+     * over the text field to write my apartment's IP address.
+     * 
+     * @param event the mouse moving over the text field.
+     */
     @FXML
     void showApto2IPTooltip(MouseEvent event) {
     	Tooltip t = new Tooltip("Escribe la IP correspondiente al Apto 2");
     	Tooltip.install(TXT_IP_APTO2, t);
     }
 
+    /**
+     * Shows a label, with a description of what is text field purpose, when the mouse is moved
+     * over the text field to write my gatehouse's IP address.
+     * 
+     * @param event the mouse moving over the text field.
+     */
     @FXML
     void showGatehouseIPTooltip(MouseEvent event) {
     	Tooltip t = new Tooltip("Escribe la IP correspondiente a la portería");
     	Tooltip.install(TXT_IP_GATEHOUSE, t);
     }
 
+    /**
+     * Shows a label, with a description of what the button does, when the mouse is moved
+     * over the back button.
+     * 
+     * @param event the mouse moving over the button.
+     */
     @FXML
     void showBackTooltip(MouseEvent event) {
     	Tooltip t = new Tooltip("Volver a la ventana principal");

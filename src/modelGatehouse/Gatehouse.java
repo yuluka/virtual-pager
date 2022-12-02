@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.net.UnknownHostException;
 
 import controlGatehouse.MainWindow;
 import javafx.application.Platform;
@@ -41,14 +40,13 @@ public class Gatehouse {
 	public static void initializeThings() throws IOException {
 		socket = new DatagramSocket(6665);
 		
-//		apartmentOneIp = InetAddress.getByName("192.168.18.136");
-//		apartmentTwoIp = InetAddress.getByName("192.168.18.136");
-		
-//		loadIPs();
-		
 		receiveMessagesThread();
 	}
 	
+	/**
+	 * Initializes the IP addresses of the other apartments with the values stored in 
+	 * the data.
+	 */
 	public static void loadIPs() {
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(IPs_DATA_PATH));

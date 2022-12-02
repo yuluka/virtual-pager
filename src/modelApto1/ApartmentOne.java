@@ -59,9 +59,6 @@ public class ApartmentOne {
 	public static void initializeThings() throws IOException {
 		socket = new DatagramSocket(6667);
 		
-//		gatehouseIp = InetAddress.getByName("192.168.18.136");
-//		apartmentTwoIp = InetAddress.getByName("192.168.18.136");
-		
 		myEmail = null;
 		emailPassword = null;
 		emergencyEmail = null;
@@ -70,6 +67,10 @@ public class ApartmentOne {
 		receiveMessagesThread();
 	}
 	
+	/**
+	 * Initializes the IP addresses of the other apartment and of the gatehouse with
+	 * the values stored in the data.
+	 */
 	public static void loadIPs() {
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(IPs_DATA_PATH));
@@ -111,6 +112,10 @@ public class ApartmentOne {
 		}
 	}
 	
+	/**
+	 * Uses an express Thread to send an email, to the specified email address, informing
+	 * that there is an emergency in the apartment.
+	 */
 	private static void sendEmergencyEmailThread() {
 		new Thread(() -> {
 			Properties properties = new Properties();

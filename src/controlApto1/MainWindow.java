@@ -36,6 +36,13 @@ public class MainWindow implements Initializable {
     @FXML
     private ImageView BTTN_REGISTER_MY_EMAIL;
 
+    /**
+     * Opens a window where the apartment can changes the IP addresses of the other 
+     * apartment and the gatehouse, when the user clicks over the change IP button.
+     * 
+     * @param event the mouse click.
+     * @throws IOException
+     */
     @FXML
     void changeIP(MouseEvent event) throws IOException {
     	FXMLLoader loader = new FXMLLoader(getClass().getResource("../uiApto1/register-ips.fxml"));
@@ -135,6 +142,12 @@ public class MainWindow implements Initializable {
     	auxSt.close();
     }
 
+    /**
+     * Shows a label, with a description of what the button does, when the mouse is moved
+     * over the change IP button.
+     * 
+     * @param event the mouse moving over the button.
+     */
     @FXML
     void showChangeIPTooltip(MouseEvent event) {
     	Tooltip t = new Tooltip("Registrar/Cambiar direcciones IP");
@@ -217,6 +230,10 @@ public class MainWindow implements Initializable {
 		}
 	}
     
+    /**
+     * Shows an alert saying that the required information to send the panic mail haven't
+     * been entered.
+     */
     public static void showNoEmailDataAlert() {
     	Alert alert = new Alert(AlertType.INFORMATION);
     	
@@ -228,6 +245,9 @@ public class MainWindow implements Initializable {
     	alert.show();
 	}
     
+    /**
+     * Shows an alert saying that the IP addresses have not been introduced yet.
+     */
     public static void showNoIPsAlert() {
     	Alert alert = new Alert(AlertType.INFORMATION);
 		
@@ -249,6 +269,9 @@ public class MainWindow implements Initializable {
     	ApartmentOne.sendAnswer(answer);
 	}
 
+    /**
+     * Initializes the things inside the apartment.
+     */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		ApartmentOne.initializeMainWindow(this);

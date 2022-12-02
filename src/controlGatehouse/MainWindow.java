@@ -47,6 +47,13 @@ public class MainWindow implements Initializable {
     	auxSt.close();
     }
     
+    /**
+     * When the user clicks over the button, opens a new window where the doorman can 
+     * enter the IP addresses of the apartaments.
+     * 
+     * @param event the mouse's button.
+     * @throws IOException
+     */
     @FXML
     void changeIP(MouseEvent event) throws IOException {
     	FXMLLoader loader = new FXMLLoader(getClass().getResource("../uiGatehouse/register-ips.fxml"));
@@ -62,6 +69,9 @@ public class MainWindow implements Initializable {
     	auxSt.close();
     }
     
+    /*
+     * Shows an alert that says that the IP addresses have not been introduced.
+     */
     public static void showNoIPsAlert() {
     	Alert alert = new Alert(AlertType.INFORMATION);
 		
@@ -123,6 +133,9 @@ public class MainWindow implements Initializable {
 		alert.show();
 	}
 
+    /**
+     * Initializes the apartments IP addresses when the window is opened.
+     */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		Gatehouse.loadIPs();

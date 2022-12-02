@@ -38,6 +38,14 @@ public class RegisterEmergencyEmail {
     @FXML
     private TextField TXT_EMERGENCY_EMAIL;
 
+    /**
+     * When the user clicks over the button, verifies that the e-mails entered are not 
+     * empty strings. If that is the case, shows an alert informing it. If not, saves 
+     * the data.
+     * 
+     * @param event the mouse's click.
+     * @throws IOException
+     */
     @FXML
     void saveEmergencyEmail(ActionEvent event) throws IOException {
     	String emergencyEmail = TXT_EMERGENCY_EMAIL.getText();
@@ -111,6 +119,12 @@ public class RegisterEmergencyEmail {
     	Tooltip.install(TXT_EMERGENCY_EMAIL, t);
     }
 
+    /**
+     * Shows a label, with a description of what is text area purpose, when the mouse is 
+     * moved over the text area to write the emergency message.
+     * 
+     * @param event the mouse moving over the text area.
+     */
     @FXML
     void showEmergencyMessageTooltip(MouseEvent event) {
     	Tooltip t = new Tooltip("Escribe el mensaje que deseas que sea enviado en caso de "

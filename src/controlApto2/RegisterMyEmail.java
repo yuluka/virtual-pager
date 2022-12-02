@@ -71,6 +71,14 @@ public class RegisterMyEmail implements Initializable {
     	auxSt.close();
     }
 
+    /**
+     * When the user clicks over the button, verifies that the e-mail, and the password,
+     * entered are not empty strings. If that is the case, shows an alert informing it. 
+     * If not, saves the data.
+     * 
+     * @param event event the mouse's click.
+     * @throws IOException
+     */
     @FXML
     void saveMyEmail(ActionEvent event) throws IOException {
     	String myEmail = TXT_MY_EMAIL.getText();
@@ -96,6 +104,9 @@ public class RegisterMyEmail implements Initializable {
 		alert.show();
 	}
     
+    /*
+     * Shows an alert that says that the entered credentials are wrong.
+     */
     private void showWrongCredentialsAlert() {
     	Alert alert = new Alert(AlertType.INFORMATION);
 		
@@ -106,6 +117,9 @@ public class RegisterMyEmail implements Initializable {
 		alert.show();
 	}
     
+    /*
+     * Shows an alert that says that the entered credentials are fine.
+     */
     private void showCorrectCredentialsAlert() {
     	Alert alert = new Alert(AlertType.INFORMATION);
 		
@@ -127,6 +141,9 @@ public class RegisterMyEmail implements Initializable {
 		alert.show();
 	}
     
+    /**
+	 * Shows an alert informing the steps to follow to use an email correctly.
+	 */
     @FXML
     void seeInfo(ActionEvent event) {
     	showInformativeAlert();
@@ -170,7 +187,10 @@ public class RegisterMyEmail implements Initializable {
     			+ "después de haber seguido los pasos de la URL especificada.");
     	Tooltip.install(TXT_PASSWORD, t);
     }
-
+    
+    /**
+     * Shows the informative address when the window is opened.
+     */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		showInformativeAlert();
